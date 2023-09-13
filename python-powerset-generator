@@ -1,0 +1,29 @@
+from itertools import chain, combinations
+
+# 집합의 모든 부분집합 생성 함수
+def powerset(iterable):
+    s = list(iterable)
+    # combinations 함수를 사용하여 입력 리스트 s에서 r개의 원소로 구성된 모든 조합을 생성합니다. 
+    # r은 0부터 입력 집합의 크기(len(s))까지 변화하며, 
+    # 따라서 가능한 모든 크기의 부분집합을 생성합니다.
+    return chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
+
+# 주어진 집합
+my_set = {1, 2, 3}
+
+# 모든 부분집합 생성
+all_subsets = list(powerset(my_set))
+
+# 인코딩된 부분집합을 저장할 리스트
+encoded_subsets = []
+
+# 모든 부분집합을 순회하면서 인코딩
+for subset in all_subsets:
+    # 부분집합을 정렬하고 인코딩합니다.
+    encoded_subset = ''.join(map(str, sorted(subset)))
+    # 인코딩된 부분집합을 리스트에 추가합니다.
+    encoded_subsets.append(encoded_subset)
+
+# 결과 출력
+for encoded_subset in encoded_subsets:
+    print(encoded_subset)
